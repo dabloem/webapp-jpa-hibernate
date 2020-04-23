@@ -3,11 +3,21 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 	version="1.0">
+    
+    <persistence-unit name="exampleHibernateJPA" transaction-type="RESOURCE_LOCAL">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+        <class>com.force.samples.entity.Book</class>
+        <class>com.force.samples.entity.Author</class>
+        <properties>
+            <property name="openjpa.ConnectionURL" value="jdbc:h2:./db/repository"/>
+            <property name="openjpa.ConnectionDriverName" value="org.h2.Driver"/>
+            <property name="openjpa.Log" value="DefaultLevel=INFO, Tool=INFO, SQL=TRACE"/>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)"/>
 
-	<persistence-unit name="exampleHibernateJPA" transaction-type="RESOURCE_LOCAL">
-		<properties>
-			<property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml" />
-		</properties>
-	</persistence-unit>
+            <!-- <property name="openjpa.jdbc.SchemaFactory" value="com.force.samples.util.ABNSchemaFactory" /> -->
+            <!-- <property name="openjpa.jdbc.Schema" value="UU01" /> -->
+        </properties>
+
+  </persistence-unit>
 
 </persistence>

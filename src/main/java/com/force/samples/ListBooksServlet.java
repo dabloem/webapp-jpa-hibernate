@@ -23,11 +23,12 @@ public class ListBooksServlet extends HttpServlet {
 		EntityManager em = PersistenceUtil.getEntityManager();
 		Query query = em.createQuery("select b from Book b");
 		List<Book> books = query.getResultList();
-		System.out.println("Books = " + books);
+		System.out.println("Schema = " + System.getProperty("openjpa.jdbc.Schema"));
+        resp.getWriter().print(books.toString());
+        resp.getWriter().flush();
+		// req.setAttribute("books", books);
 		
-		req.setAttribute("books", books);
-		
-		RequestDispatcher rd = getServletContext().getRequestDispatcher("/listResults.jsp");
-		rd.forward(req, resp);
+		// RequestDispatcher rd = getServletContext().getRequestDispatcher("/listResults.jsp");
+		// rd.forward(req, resp);
 	}
 }
